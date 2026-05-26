@@ -78,6 +78,6 @@ resource "aws_instance" "my_instance" {
         volume_type = "gp2"
     }
     tags = {
-        Name = each.key
+        Name = "${each.key}-${var.env}"
     }
 }
