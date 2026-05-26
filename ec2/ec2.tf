@@ -58,8 +58,15 @@ resource "aws_security_group" "my_security_group" {
 # create EC2 instance
 resource "aws_instance" "my_instance" {
     #count =2 # meta arguments
+    for_each = tomap(
+        {
+           " my-instance-micro" = "t2.micro",
+            "my-instance-medium"="t2.medium"
+        }
+    )
     ami           = var.ec2_ami_id # Amazon Linux 2 AMI (HVM), SSD Volume Type
-    instance_type = var.ec2_instance_type
+    #instance_type = var.ec2_instance_type
+    instance_type = each.value
     key_name      = aws_key_pair.my_key.key_name #interpolation to get the key pair name
     security_groups = [aws_security_group.my_security_group.name] #interpolation to get the security group name
     user_data = file("install_nginx.sh")
@@ -69,6 +76,6 @@ resource "aws_instance" "my_instance" {
         volume_type = "gp2"
     }
     tags = {
-        Name = "my-ec2-instance"
+        Name = each.key
     }
 }
