@@ -57,10 +57,12 @@ resource "aws_security_group" "my_security_group" {
 
 # create EC2 instance
 resource "aws_instance" "my_instance" {
+    #count =2 # meta arguments
     ami           = var.ec2_ami_id # Amazon Linux 2 AMI (HVM), SSD Volume Type
     instance_type = var.ec2_instance_type
     key_name      = aws_key_pair.my_key.key_name #interpolation to get the key pair name
     security_groups = [aws_security_group.my_security_group.name] #interpolation to get the security group name
+    user_data = file("install_nginx.sh")
 
     root_block_device {
         volume_size = var.ec2_root_storage_size

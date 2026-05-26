@@ -1,3 +1,4 @@
 creating ec2 instance.
 using variables
 output
+user_data ( install inginx)
