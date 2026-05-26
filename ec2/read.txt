@@ -4,3 +4,5 @@ output
 user_data ( install inginx)
 add count and foreach
 depends on
+conditional expression.
+completes terraform commands, structure and CLI
