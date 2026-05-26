@@ -15,3 +15,8 @@ variable "ec2_root_storage_size" {
     type = string
    
  }
+
+ variable "env" {
+    default = "prd"
+    type = string
+ }

@@ -3,3 +3,4 @@ using variables
 output
 user_data ( install inginx)
 add count and foreach
+depends on
